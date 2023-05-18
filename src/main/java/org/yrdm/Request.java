@@ -16,20 +16,36 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @Data
 public class Request implements Runnable{
+    /**
+     * 请求编号
+     */
     private Integer id;
-
+    /**
+     * 请求优先级
+     */
     private Integer priority;
-
+    /**
+     * 请求处理时间
+     */
     private Integer processTime;
 
     //static PriorityQueue<Server> servers;
     //static LinkedList<Server> servers;
+    /**
+     * 请求要操作的服务器
+     */
     static Server[] servers;
-
+    /**
+     * 服务质量
+     */
     static Integer Qos=0;
-
+    /**
+     * 吞吐量： 目前含义为请求成功的数量
+     */
     static Integer throughOut=0;
-
+    /**
+     * 失败次数
+     */
     static int fail=0;
 
     public Request(){}
@@ -41,7 +57,9 @@ public class Request implements Runnable{
 
     //private Lock lock = new ReentrantLock();
 
-
+    /**
+     * 线程要执行的方法体
+     */
     @Override
     public void run() {
         /*Server ser = servers.poll();
@@ -69,6 +87,9 @@ public class Request implements Runnable{
             servers[avail].size++;
             servers[avail].loadRate=(double) servers[avail].size/servers[avail].capacity;
             try {
+                /**
+                 * 线程睡眠模拟处理时间
+                 */
                 Thread.sleep(processTime);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -83,6 +104,11 @@ public class Request implements Runnable{
             System.out.println("Request "+id+" denied");
         }
     }
+
+    /**
+     * 从头遍历servers，有空闲就返回下标。都满的话返回-1
+     * @return
+     */
     public int isFull(){
         for(var ser:servers){
             if(ser.size!=ser.capacity) return ser.id;
