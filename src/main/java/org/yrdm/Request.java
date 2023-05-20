@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @Author: zbq
  * @Date: 2023/5/16 上午10:50
  */
-@Data
+//@Data
 public class Request implements Runnable{
     /**
      * 请求编号
@@ -116,6 +116,36 @@ public class Request implements Runnable{
         return -1;
     }
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    public Integer getProcessTime() {
+        return processTime;
+    }
+
+    public void setProcessTime(Integer processTime) {
+        this.processTime = processTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "id=" + id +
+                ", priority=" + priority +
+                ", processTime=" + processTime +
+                '}';
+    }
 }
