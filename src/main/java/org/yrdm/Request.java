@@ -98,7 +98,7 @@ public class Request implements Runnable{
             servers[avail].loadRate=(double) servers[avail].size/servers[avail].capacity;
             Qos+=priority*priority;
             throughOut++;
-            System.out.println("Qos : "+Qos+" throughOut : "+throughOut);
+            System.out.println("Qos : "+Qos+" throughOut : "+throughOut+" fail: "+fail);
         }else{
             fail++;
             System.out.println("Request "+id+" denied");
@@ -115,5 +115,7 @@ public class Request implements Runnable{
         }
         return -1;
     }
+
+
 
 }
