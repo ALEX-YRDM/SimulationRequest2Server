@@ -48,6 +48,10 @@ public class Request implements Runnable{
      */
     static int fail=0;
 
+    static int[] priCount=new int[3];
+
+    static int[] priProcess=new int[3];
+
     public Request(){}
     public Request(Integer id, Integer priority, Integer processTime) {
         this.id = id;
@@ -98,6 +102,7 @@ public class Request implements Runnable{
             servers[avail].loadRate=(double) servers[avail].size/servers[avail].capacity;
             Qos+=priority*priority;
             throughOut++;
+            priProcess[priority-1]++;
             System.out.println("Qos : "+Qos+" throughOut : "+throughOut+" fail: "+fail);
         }else{
             fail++;
